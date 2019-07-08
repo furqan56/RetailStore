@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.IO;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 namespace RetailStore
 {
@@ -29,6 +24,46 @@ namespace RetailStore
                 .UseConfiguration(config)
                 .UseStartup<Startup>();
         }
-            
+
+    }
+
+    public class Student
+    {
+        public static StudentBuilder Builder { get; } = new StudentBuilder();
+        public string Id { get; }
+
+        public Student(string id)
+        {
+            Id = id;
+        }
+
+        public string Name { get; set; }
+        public string Roll { get; set; }
+        public string ETC { get; set; }
+
+    }
+
+    public class StudentBuilder
+    {
+        private string _name;
+        private string _roll
+            ;
+
+        public StudentBuilder WithName(string name)
+        {
+            _name = name;
+            return this;
+        }
+
+        public StudentBuilder WithRollNumber(string roll)
+        {
+            _roll = roll;
+            return this;
+        }
+
+        public Student Build()
+        {
+            return new Student($"{_roll}-{_name}");
+        }
     }
 }
