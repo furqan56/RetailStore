@@ -46,8 +46,7 @@ namespace RetailStore
     public class StudentBuilder
     {
         private string _name;
-        private string _roll
-            ;
+        private string _roll;
 
         public StudentBuilder WithName(string name)
         {
