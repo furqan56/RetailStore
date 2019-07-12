@@ -22,7 +22,7 @@ namespace RetailStore.Controllers
         // GET: Categories
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Categories.ToListAsync());
+            return View(await _context.Categories.AsNoTracking().ToListAsync());
         }
 
         // GET: Categories/Details/5
@@ -72,7 +72,6 @@ namespace RetailStore.Controllers
             {
                 return NotFound();
             }
-
             var category = await _context.Categories.FindAsync(id);
             if (category == null)
             {
