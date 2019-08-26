@@ -53,16 +53,32 @@ namespace RetailStore.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name")] Category category)
         {
-            if (ModelState.IsValid)
+            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
             {
                 _context.Add(category);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                var categories = _context.Categories.Select(x => new SelectListItem
+                {
+                    Text = x.Name,
+                    Value = x.Id.ToString(),
+                    Selected= x.Name.Equals(category.Name)
+                });
+                return Json(categories);
             }
-            return View(category);
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    _context.Add(category);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(category);
+            }
+         
         }
 
         // GET: Categories/Edit/5
