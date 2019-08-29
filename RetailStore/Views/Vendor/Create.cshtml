@@ -4,43 +4,44 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Create</h1>
-
-<h4>VendorViewModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ContactNo" class="control-label"></label>
-                <input asp-for="ContactNo" class="form-control" />
-                <span asp-validation-for="ContactNo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TaxId" class="control-label"></label>
-                <input asp-for="TaxId" class="form-control" />
-                <span asp-validation-for="TaxId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<!-- Horizontal Form -->
+<div class="card card-info">
+    <div class="card-header">
+        <h3 class="card-title">Create</h3>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form class="form-horizontal" asp-action="Create">
+        <div class="card-body">
+            <div class="form-group row">
+                <label asp-for="Name" class="col-sm-2 control-label"></label>
+                <div class="col-sm-5">
+                    <input asp-for="Name" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Address" class="col-sm-2 control-label"></label>
+                <div class="col-sm-5">
+                    <input asp-for="Address" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="ContactNo" class="col-sm-2 control-label"></label>
+                <div class="col-sm-5">
+                    <input asp-for="ContactNo" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="TaxId" class="col-sm-2 control-label"></label>
+                <div class="col-sm-5">
+                    <input asp-for="TaxId" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-info" />
+                <button asp-action="Index" class="btn btn-info">Back to List</button>
+            </div>
+        </div>    
+    </form>
 </div>
 
