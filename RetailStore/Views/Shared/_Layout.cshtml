@@ -26,34 +26,36 @@
   <link rel="stylesheet" href="~/lib/daterangepicker/daterangepicker.css" />
   <link rel="stylesheet" href="~/lib/summernote/summernote-bs4.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" />
+  <link rel="stylesheet" href="~/lib/datatables/dataTables.bootstrap4.min.css" />
   <link rel="stylesheet" href="~/css/site.css" />
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">
 
     <partial name="_Header" />
     <partial name="_Sidebar" />
-    
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       @RenderBody()
     </div>
-  <!-- Control Sidebar -->
-    
-  <partial name="_Footer" />
-  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control Sidebar -->
+
+    <partial name="_Footer" />
+    <aside class="control-sidebar control-sidebar-dark">
       <!-- Control sidebar content goes here -->
     </aside>
     <!-- /.control-sidebar -->
   </div>
-  
 
-@*<div class="container">
-    <partial name="_CookieConsentPartial" />
-    <main role="main" class="pb-3">
-      @RenderBody()
-    </main>
-  </div>*@
+
+  @*<div class="container">
+      <partial name="_CookieConsentPartial" />
+      <main role="main" class="pb-3">
+        @RenderBody()
+      </main>
+    </div>*@
 
   <environment include="Development">
     <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -80,6 +82,7 @@
   <script src="~/lib/sparklines/sparkline.js" asp-append-version="true"></script>
   <script src="~/lib/jqvmap/jquery.vmap.min.js" asp-append-version="true"></script>
   <script src="~/lib/jqvmap/maps/jquery.vmap.world.js" asp-append-version="true"></script>
+
   <!-- jQuery Knob Chart -->
   <script src="~/lib/jquery-knob/jquery.knob.min.js" asp-append-version="true"></script>
   <!-- daterangepicker -->
@@ -92,15 +95,20 @@
   <!-- overlayScrollbars -->
   <script src="~/lib/overlayScrollbars/js/jquery.overlayScrollbars.min.js" asp-append-version="true"></script>
   <!-- FastClick -->
-<script src="~/lib/fastclick/fastclick.js" asp-append-version="true"></script>
-  
-<!-- AdminLTE App -->
-<script src="~/js/adminlte.js" asp-append-version="true"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="~/js/pages/dashboard.js" asp-append-version="true"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="~/js/demo.js" asp-append-version="true"></script>
+  <script src="~/lib/fastclick/fastclick.js" asp-append-version="true"></script>
 
-@RenderSection("Scripts", required: false)
+
+
+  <!-- AdminLTE App -->
+  <script src="~/js/adminlte.js" asp-append-version="true"></script>
+  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+  <script src="~/js/pages/dashboard.js" asp-append-version="true"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="~/js/demo.js" asp-append-version="true"></script>
+
+  <!-- DataTable -->
+  <script src="~/lib/datatables/dataTables.bootstrap4.min.js" asp-append-version="true"></script>
+
+  @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using RetailStore.Data;
 using RetailStore.Domain;
 using RetailStore.Models;
+using RetailStore.Utils;
 
 namespace RetailStore.Controllers
 {
@@ -21,15 +22,23 @@ namespace RetailStore.Controllers
         }
         public IActionResult Index()
         {
-            var products = _context.Products.AsNoTracking().Select(x => new ProductViewModel
+            if (Request.IsAjaxRequest())
             {
-                CategoryName = x.Category.Name,
-                Description = x.Description,
-                Name = x.Name,
-                Id = x.Id,
-                SalePrice = x.SalePrice
-            }).ToList();
-            return View(products);
+                var products = _context.Products.AsNoTracking().Select(x => new ProductViewModel
+                {
+                    CategoryName = x.Category.Name,
+                    Description = x.Description,
+                    Name = x.Name,
+                    Id = x.Id,
+                    SalePrice = x.SalePrice
+                }).ToList();
+                return Json(products);
+            }
+            else
+            {
+                return View();
+            }
+
         }
 
         public IActionResult Create()

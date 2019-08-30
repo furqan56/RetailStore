@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RetailStore.Data;
 using RetailStore.Domain;
+using RetailStore.Utils;
 
 namespace RetailStore.Controllers
 {
@@ -55,7 +56,7 @@ namespace RetailStore.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([Bind("Id,Name")] Category category)
         {
-            if (Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+            if (Request.IsAjaxRequest())
             {
                 _context.Add(category);
                 await _context.SaveChangesAsync();
