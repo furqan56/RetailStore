@@ -32,7 +32,7 @@ namespace RetailStore.Controllers
                     Id = x.Id,
                     SalePrice = x.SalePrice
                 }).ToList();
-                return Json(products);
+                return Json(new{data=products});
             }
             else
             {
