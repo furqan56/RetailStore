@@ -13,5 +13,9 @@ namespace RetailStore.Domain
         public string Description { get; set; }
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
+        public double AverageUnitCost { get; set; }
+        public double  Quantity { get; set; }
+
+
     }
 }

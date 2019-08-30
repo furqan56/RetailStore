@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RetailStore.Data;
 
 namespace RetailStore.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190830112544_productModelUpdatedStockQuantityAndCostAdded")]
+    partial class productModelUpdatedStockQuantityAndCostAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -222,33 +224,6 @@ namespace RetailStore.Data.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("RetailStore.Domain.StockHistory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Date");
-
-                    b.Property<int>("ProductId");
-
-                    b.Property<double>("Quantity");
-
-                    b.Property<int>("VendorId");
-
-                    b.Property<int?>("VendorId1");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("VendorId");
-
-                    b.HasIndex("VendorId1");
-
-                    b.ToTable("StockHistory");
-                });
-
             modelBuilder.Entity("RetailStore.Domain.Vendor", b =>
                 {
                     b.Property<int>("Id")
@@ -365,23 +340,6 @@ namespace RetailStore.Data.Migrations
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict);
-                });
-
-            modelBuilder.Entity("RetailStore.Domain.StockHistory", b =>
-                {
-                    b.HasOne("RetailStore.Domain.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("RetailStore.Domain.Vendor", "Vendor")
-                        .WithMany()
-                        .HasForeignKey("VendorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("RetailStore.Domain.Vendor")
-                        .WithMany("Supplies")
-                        .HasForeignKey("VendorId1");
                 });
 #pragma warning restore 612, 618
         }

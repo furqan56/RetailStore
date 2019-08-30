@@ -12,5 +12,6 @@ namespace RetailStore.Domain
         public string Address { get; set; }
         public string ContactNo { get; set; }
         public string TaxId { get; set; }
+        public virtual List<StockHistory> Supplies  { get; set; }
     }
 }
