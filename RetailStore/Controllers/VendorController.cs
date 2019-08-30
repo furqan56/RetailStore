@@ -89,6 +89,27 @@ namespace RetailStore.Controllers
             return RedirectToAction(nameof(Index));
 
         }
+        
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var vendorToBeDeleted = context.Vendors.FirstOrDefault(v => v.Id == id);
+
+            if (vendorToBeDeleted == null)
+                return NotFound();
+
+            return View(vendorToBeDeleted);
+        }
+        [HttpPost, ActionName("Delete")]
+        public IActionResult ConfirmDeletion(int id)
+        {
+            var vendorToBeDeleted = context.Vendors.Find(id);
+            context.Vendors.Remove(vendorToBeDeleted);
+            context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
     }
 
   
