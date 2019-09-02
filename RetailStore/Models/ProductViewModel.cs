@@ -17,5 +17,8 @@ namespace RetailStore.Models
         public string Description { get; set; }
         [Required]
         public int CategoryId { get; set; }
+
+        public double QtyAvailable { get; set; }
+        public double UnitCost { get; set; }
     }
 }

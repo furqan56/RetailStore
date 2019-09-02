@@ -30,7 +30,9 @@ namespace RetailStore.Controllers
                     Description = x.Description,
                     Name = x.Name,
                     Id = x.Id,
-                    SalePrice = x.SalePrice
+                    SalePrice = x.SalePrice,
+                    UnitCost=x.AverageUnitCost,
+                    QtyAvailable=x.Quantity
                 }).ToList();
                 return Json(new{data=products});
             }

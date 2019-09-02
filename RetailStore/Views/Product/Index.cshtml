@@ -40,6 +40,44 @@
 </section>
 
 
+<div class="modal" tabindex="-1" role="dialog" id="addNewStockModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="titleText">Add New Stock</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="newCategoryForm">
+        <div class="modal-body">
+
+          <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+          <div class="form-group">
+            <label for="vendor" class="control-label">Vendor</label>
+            <select name="vendor" id="vendor" class="form-control">
+              <option>ClickChain</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="qtyPurchased" class="control-label">Quantity Purchased</label>
+            <input name="qtyPurchased" id="qtyPurchased" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="unitCost" class="control-label">Unit Cost</label>
+            <input name="unitCost" id="unitCost" class="form-control" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="addNewCategory">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
 @section Scripts
   {
   <script>
@@ -53,22 +91,36 @@
         paging: true,
         ajax: {
           type: 'Get',
-          url: '/product/index',
+          url: '/product/index'
         },
         columns: [
           { data: "categoryName", title: 'Category' },
           { data: "name", title: 'Name' },
-          { data: "description", title: 'Description' },
           { data: "salePrice", title: 'Unit Price' },
+          { data: "qtyAvailable", title: 'Available Qty#' },
+          { data: "unitCost", title: 'Unit Cost' },
           {
             data: "", title: 'Action', render: function (data, type, row, meta) {
-              return '<a href="Product/Edit/' + row.id + '">Edit</a> | <a href="Product/Detail/' + row.id + '">Detail</a> | <a href="Product/Delete/' + row.id + '">Delete</a>';
+              return '<a href="/Product/Edit/' + row.id + '">Edit</a> | <a href="/Product/Detail/' + row.id + '">Detail</a> | <a href="/Product/Delete/' + row.id + '">Delete</a> | <a href="#" onclick="showAddStockModal(event)" data-attr="' + row.id + '">Add Stock</a>';
             }
           }
         ]
       });
 
     }
+
+    function showAddStockModal(event) {
+      var productId = $(event.target).attr('data-attr');
+      
+      var product = productTable.rows().data().filter(function(product) {
+        return product.id == productId;
+      })[0];
+
+      $("#titleText").html(product.name + ' - Add Stock');
+
+      $('#addNewStockModal').modal();
+    }
+    
 
   </script>
 
