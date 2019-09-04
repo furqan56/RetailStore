@@ -51,7 +51,7 @@
       </div>
       <form id="newCategoryForm">
         <div class="modal-body">
-
+          <input type="hidden" id="productId"/>
           <div asp-validation-summary="ModelOnly" class="text-danger"></div>
           <div class="form-group">
             <label for="vendor" class="control-label">Vendor</label>
@@ -69,7 +69,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" id="addNewCategory">Save changes</button>
+          <button type="button" class="btn btn-primary" onclick="createStock(event)">Save changes</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
         </div>
       </form>
@@ -117,10 +117,50 @@
       })[0];
 
       $("#titleText").html(product.name + ' - Add Stock');
+      $("#productId").val(productId);
 
-      $('#addNewStockModal').modal();
+      $.ajax({
+        type: 'Get',
+        url: '/Vendor/index',
+        success: function (result) {
+          var optionHtml = '';
+          for (var i = 0; i < result.length; i++) {
+            optionHtml += '<option value="' + result[i].id + '">' + result[i].name + '</option>';
+          }
+          $('#vendor').html(optionHtml);
+          $('#addNewStockModal').modal();
+        },
+        error: function(error) {
+          console.log(error);
+        }
+      });
+
+
     }
-    
+    function createStock() {
+      var form = new FormData();
+      form.append('ProductId', $("#productId").val());
+      form.append('VendorId', $('#vendor').val());
+      form.append('QtyPurchased', $('#qtyPurchased').val());
+      form.append('UnitCost', $('#unitCost').val());
+
+      $.ajax({
+        type: 'Post',
+        data: form,
+        processData: false,
+        contentType: false,
+        dataType: "json",
+        url: '/stockhistory/post',
+        success:function (data, textStatus, jqXHR){
+          $('#addNewStockModal').modal('hide');
+          productTable.ajax.reload();
+        },
+        error: function (data, textStatus, jqXHR) {
+          console.log(data);
+        }
+      });
+
+    }
 
   </script>
 

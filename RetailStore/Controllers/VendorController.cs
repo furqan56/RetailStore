@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using RetailStore.Data;
 using RetailStore.Domain;
 using RetailStore.Models;
+using RetailStore.Utils;
 
 namespace RetailStore.Controllers
 {
@@ -15,15 +16,31 @@ namespace RetailStore.Controllers
         }
         public IActionResult Index()
         {
-           var vendors = context.Vendors.Select(x => new VendorViewModel
+            if (Request.IsAjaxRequest())
             {
-                Id = x.Id,
-                Name = x.Name,
-                Address = x.Address,
-                ContactNo = x.ContactNo,
-                TaxId = x.TaxId
-            });
-            return View(vendors);
+                var vendors = context.Vendors.Select(x => new VendorViewModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Address = x.Address,
+                    ContactNo = x.ContactNo,
+                    TaxId = x.TaxId
+                });
+                return Json(vendors);
+            }
+            else
+            {
+                var vendors = context.Vendors.Select(x => new VendorViewModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Address = x.Address,
+                    ContactNo = x.ContactNo,
+                    TaxId = x.TaxId
+                });
+                return View(vendors);
+            }
+           
         }
 
         public IActionResult Create()

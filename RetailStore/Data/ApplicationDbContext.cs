@@ -19,6 +19,7 @@ namespace RetailStore.Data
         public DbSet<Product> Products { get; set; }
 
         public DbSet<Vendor> Vendors { get; set; }
+        public DbSet<StockHistory> StockHistories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -34,9 +35,5 @@ namespace RetailStore.Data
 
             base.OnModelCreating(builder);
         }
-
-        public DbSet<RetailStore.Models.ProductViewModel> ProductViewModel { get; set; }
-
-        public DbSet<RetailStore.Models.VendorViewModel> VendorViewModel { get; set; }
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using RetailStore.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RetailStore.Services;
 
 namespace RetailStore
 {
@@ -30,6 +31,8 @@ namespace RetailStore
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            services.AddScoped<IProductStockService, ProductStockService>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
