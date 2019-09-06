@@ -8,14 +8,14 @@ using RetailStore.Domain;
 
 namespace RetailStore.Data.Config
 {
-    public class StockHistoryConfiguration : IEntityTypeConfiguration<StockHistory>
+    public class CustomerConfigration : IEntityTypeConfiguration<SaleOrder>
     {
-        public void Configure(EntityTypeBuilder<StockHistory> builder)
+        public void Configure(EntityTypeBuilder<SaleOrder> builder)
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).UseSqlServerIdentityColumn<int>().ValueGeneratedOnAdd();
-            builder.HasOne(x => x.Product).WithMany().HasForeignKey(x => x.ProductId);
-            builder.HasOne(x => x.Vendor).WithMany().HasForeignKey(x => x.VendorId);
+            builder.HasOne(x => x.Customer).WithMany().HasForeignKey(x => x.CustomerId);
+            
         }
     }
 }
